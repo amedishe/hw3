@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+
+<body>
+    {% block content %}
+    <div>
+        <div style="display: flex; height: 80px; background-color: lightblue; ">
+            <h1 style="font-family: 'Courier New', Courier, monospace ;margin-left: 30px;">
+                Student Management System
+            </h1>
+        </div>
+        <div style="display: flex; flex-direction: row;justify-content: space-evenly; margin-top: 30px;">
+            <!-- form Section -->
+
+            <div
+                style="background-color: lightblue ;padding: 20px; border-radius: 20px;display: flex;flex-direction: column;">
+                <h3 style="font-family: 'Courier New', Courier, monospace ;align-self: center;color: greenyellow;">
+                    {{msg}}</h3>
+                <h2 style="font-family: 'Courier New', Courier, monospace ;align-self: center;">
+                    Add Student
+                </h2>
+                <form action="http://127.0.0.1:5000/add_record" method="post"
+                    style="align-items: center;justify-content: center;">
+                    <label for="fname">Name:</label>
+                    <input type="text" id="fname" name="fname"><br><br>
+                    <label for="lname">Mark:</label>
+                    <input type="number" id="lname" name="lname"><br><br>
+                    <input style="align-self: center;" type="submit" value="Submit">
+                </form>
+            </div>
+            <!-- Delete section  -->
+            <div
+                style="background-color: lightblue ;padding: 20px; border-radius: 20px;display: flex;flex-direction: column;">
+                <h3 style="font-family: 'Courier New', Courier, monospace ;align-self: center;color: greenyellow;">
+                    {{delmsg}}</h3>
+                <h2 style="font-family: 'Courier New', Courier, monospace ;align-self: center;">
+                    Delete Student
+                </h2>
+                <form action="http://127.0.0.1:5000/delete_student" method="post"
+                    style="align-items: center;justify-content: center;">
+                    <label for="id">Id:</label>
+                    <input type="text" id="id" name="id"><br><br>
+                    <input style="align-self: center;" type="submit" value="Delete">
+                </form>
+            </div>
+        </div>
+        <!-- button section -->
+        <div style="display: flex;flex-direction: column; align-items: center;margin-top: 20px">
+            <div style="display:flex ; justify-content: space-evenly; margin: 10px">
+                <form action="http://127.0.0.1:5000/get_records" method="post" style="padding: 10px;">
+                    <input type="hidden" value="False" name="type" id="type">
+                    <input style="align-self: center;" type="submit" value="Get All Student">
+                </form>
+                <form action="http://127.0.0.1:5000/get_records" method="post" style="padding: 10px;">
+                    <input type="hidden" value="True" name="type" id="type">
+                    <input style="align-self: center;" type="submit" value="Get Pass Student">
+                </form>
+            </div>
+            <table border=1 style="padding:2px ;">
+                <tr style="padding:2px ;">
+                    <th style="padding:12px ;">
+                        ID
+                    </th>
+                    <th style="padding:12px ;">
+                        Name
+                    </th>
+                    <th style="padding:12px ;">
+                        Marks
+                    </th>
+                </tr>
+                {% for x in data %}
+                <tr>
+                    <td style="padding:2px ;">{{x._id}}</td>
+                    <td style="padding:2px ;">{{x.name}}</td>
+                    <td style="padding:2px ;">{{x.marks}}</td>
+
+                </tr>
+                {% endfor %}
+                {% endblock %}
+        </div>
+    </div>
+    
+</body>
+
+</html>
